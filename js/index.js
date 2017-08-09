@@ -60,7 +60,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f27c3cbc218056c9089c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4f2a535f78cebb861a53"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -10393,6 +10393,8 @@ module.exports = getHostComponentFromComposite;
 "use strict";
 
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(82);
 
 var _react2 = _interopRequireDefault(_react);
@@ -10411,6 +10413,21 @@ _reactDom2.default.render(_react2.default.createElement(
   null,
   'Hello, world!'
 ), document.getElementById('app'));
+var props = {
+  foo: 'default'
+};
+var component = _react2.default.createElement(
+  'div',
+  props,
+  'test'
+);
+console.log(component.props.foo);
+var component2 = _react2.default.createElement(
+  'div',
+  _extends({}, props, { foo: 'news' }),
+  'test'
+);
+console.log(component2.props.foo);
 
 /***/ }),
 /* 82 */
