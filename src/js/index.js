@@ -1,28 +1,52 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//Es5写法
 // var HelloMessage = React.createClass({
-//   render: function() {
-//     return <h1>Hello World！</h1>;
+//   getInitialState:function(){
+//     return{
+//         state1:"state1"
+//     }
+//   },
+//   getDefaultProps:function(){
+//     return{
+//       name:'fy'
+//     }
+//   },
+//   componentDidMount(){
+//     //this.state.state1 = "new state"
+//     this.setState({state1:"new state"});
+//   },
+//   propTypes:{
+//     name: React.PropTypes.string.isRequired,
+//     title: React.PropTypes.string.isRequired
+//   },
+//   render:function() {
+//
+//     return <h1>hello,{this.props.name} {this.props.title} {this.state.state1}</h1>
 //   }
-// });
+// })
 
-// ES6写法
-// class HelloMessage extends React.Component{
-//   render(){
-//     return <h1>Hello World!</h1>;
-//   }
-// }
+class HelloMessage extends React.Component{
+  constructor(props){
+    super(props)
+    this.state= {state1:"state1"}
+  }
+  componentDidMount(){
+    this.setState({state1: "new state"})
+  }
+  render(){
+    return <h1>hello,{this.props.name} {this.props.title} {this.state.state1}</h1>
+  }
+}
 
-//直接写一个函数也可以定义一个组件
-function HelloMessage(props){
-  //props.name = "fy"
-  //let v="fy"
-  return  <h1>Hello {props.name}!</h1>
+HelloMessage.defaultProps ={
+  name:"fy"
+}
+HelloMessage.propTypes ={
+  title: React.PropTypes.string.isRequired
 }
 
 ReactDOM.render(
-  <HelloMessage name="world" />,
+  <HelloMessage name="world" title="test"/>,
   document.getElementById('app')
 );
