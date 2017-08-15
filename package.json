@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"webpack-dev-server",
-    "build":"webpack"
+    "dev": "webpack-dev-server",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,8 @@
   "homepage": "https://github.com/pengteling/react#readme",
   "dependencies": {
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-transition-group": "^1.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
@@ -33,6 +34,10 @@
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
     "webpack": "^3.5.1",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-server": "^2.7.1",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "sass-loader": "^6.0.6",
+    "node-sass": "^4.5.3",
+    "css-loader": "^0.28.4"
   }
 }

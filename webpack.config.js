@@ -1,6 +1,7 @@
-var webpack = require("webpack");
-var path=require("path");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack")
+const path=require("path")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 module.exports={
   entry:{
     "index":"./src/js/index.js"
@@ -31,6 +32,21 @@ module.exports={
         use:{
           loader:"html-loader"
         }
+      },
+      {
+        test: /\.scss$/,
+        use:ExtractTextPlugin.extract([
+          {
+            loader:"css-loader",
+            options:{sourceMap:true}
+          },
+          {
+            loader:"sass-loader",
+            options:{
+              sourceMap:true
+            }
+          }
+        ])
       }
     ]
   },
@@ -41,7 +57,11 @@ module.exports={
       //inject:'head'
       inject:"body"
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin({
+      filename:"css/[name].css",
+      allChunks:true
+    })
   ],
   devServer: {
     //contentBase: path.join(__dirname, "dist"),
@@ -51,4 +71,5 @@ module.exports={
     hot:true,
     host:"0.0.0.0"
   },
+  devtool:"source-map"
 }
