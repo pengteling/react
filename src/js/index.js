@@ -1,69 +1,128 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
-
-
-
-// class Box extends React.Component{
+// class RegForm extends React.Component{
 //   constructor(props){
 //     super(props)
-//     this.handleSubmit = this.handleSubmit.bind(this)
+//     this.state={
+//       username:"",
+//       sex:"0",
+//       agree:false
+//     }
+//     this.handleChangeSex=this.handleChangeSex.bind(this)
+//     this.handlChangeUsername=this.handlChangeUsername.bind(this)
+//     this.handleChangeAgree=this.handleChangeAgree.bind(this)
+//     this.handleSubmit=this.handleSubmit.bind(this)
 //   }
-//
-//   handleSubmit(e){
-//     e.preventDefault()
-//     console.log(this._ipt.value)
-//     // 可以说明 this._ipt 就是原生DOM元素 用了findDOMNode还是自身
-//     console.log(ReactDOM.findDOMNode(this._ipt)===this._ipt)
-//     // 当参数是Component获取的是该Component render方法中的DOM
-//     console.log(ReactDOM.findDOMNode(this)===this)
+//   handleSubmit(){
+//     console.log(this.state)
 //   }
-//
+//   handleChangeSex(e){
+//     this.setState({
+//       sex:e.target.value
+//     })
+//   }
+//   handlChangeUsername(e){
+//     this.setState({
+//       username:e.target.value
+//     })
+//   }
+//   handleChangeAgree(e){
+//     this.setState({
+//       agree:e.target.checked
+//     })
+//   }
 //   render(){
-//     console.log("render")
-//     return (
-//       <form onSubmit={this.handleSubmit}>
-//       <input type="text" defaultValue="default"  ref={ipt => this._ipt =ipt}  />
-//       <input type="submit" />
-//       </form>
+//     return(
+//       <div>
+//         <input type="text" placeholder="请输入姓名" name="username" id="username" onChange={this.handlChangeUsername} /><br/>
+//         <select name="sex" id="sex" onChange={this.handleChangeSex}>
+//           <option value="0">女</option>
+//           <option value="1">男</option>
+//         </select><br/>
+//         <lable htmlFor="agree">同意</lable><input type="checkbox" name="agree" id="agree" onClick={this.handleChangeAgree}/><br/>
+//         <input type="submit" value="提交" onClick ={this.handleSubmit}/>
+//       </div>
 //     )
 //   }
 // }
 
 
-class Box extends React.Component{
+// class RegForm extends React.Component{
+//   constructor(props){
+//     super(props)
+//     this.state={
+//       username:"",
+//       sex:"0",
+//       agree:false
+//     }
+//     this.handleChange=this.handleChange.bind(this)
+//     this.handleSubmit=this.handleSubmit.bind(this)
+//   }
+//   handleSubmit(){
+//     console.log(this.state)
+//   }
+//   handleChange(name,e){
+//     this.setState({
+//       [name]: name=="agree" ? e.target.checked: e.target.value
+//     })
+//   }
+//   render(){
+//     return(
+//       <div>
+//         <input type="text" placeholder="请输入姓名" name="username" id="username" onChange={this.handleChange.bind(this,"username")} /><br/>
+//         <select name="sex" id="sex" onChange={this.handleChange.bind(this,"sex")}>
+//           <option value="0">女</option>
+//           <option value="1">男</option>
+//         </select><br/>
+//         <lable htmlFor="agree">同意</lable><input type="checkbox" name="agree" id="agree" onClick={this.handleChange.bind(this,"agree")}/><br/>
+//         <input type="submit" value="提交" onClick ={this.handleSubmit}/>
+//       </div>
+//     )
+//   }
+// }
+
+
+class RegForm extends React.Component{
   constructor(props){
     super(props)
-    this.state={iptValue:"default"}
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.state={
+      username:"",
+      sex:"0",
+      agree:false
+    }
+    this.handleChange=this.handleChange.bind(this)
+    this.handleSubmit=this.handleSubmit.bind(this)
   }
-
-  handleSubmit(e){
-    e.preventDefault()
-    console.log(this.state.iptValue)
+  handleSubmit(){
+    console.log(this.state)
   }
   handleChange(e){
-    // 可以证明e.target是DOM节点
-    console.log(e.target===this._ipt)
+    // console.log(e.target.value)
+    // console.log(e.target.name)
+    //console.log(e.target)
     this.setState({
-      iptValue:e.target.value
+      [e.target.name]: [e.target.name]=="agree" ? e.target.checked: e.target.value
     })
-  }
 
+  }
   render(){
-    console.log("render")
-    return (
-      <form onSubmit={this.handleSubmit}>
-      <input type="text" value={this.state.iptValue} onChange={this.handleChange} ref={ipt => this._ipt =ipt}/>
-      <input type="submit" />
-      </form>
+    //console.log("render")
+    return(
+      <div>
+        <input type="text" placeholder="请输入姓名" name="username" id="username" onChange={this.handleChange} /><br/>
+        <select name="sex" id="sex" onChange={this.handleChange}>
+          <option value="0">女</option>
+          <option value="1">男</option>
+        </select><br/>
+        <lable htmlFor="agree">同意</lable><input type="checkbox" name="agree" id="agree" onClick={this.handleChange}/><br/>
+        <input type="submit" value="提交" onClick ={this.handleSubmit}/>
+      </div>
     )
   }
 }
 
 ReactDOM.render(
-  <Box />,
+  <RegForm />,
   document.getElementById('app')
 );
