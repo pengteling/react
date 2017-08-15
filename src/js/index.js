@@ -95,6 +95,8 @@ class RegForm extends React.Component{
     this.handleSubmit=this.handleSubmit.bind(this)
   }
   handleSubmit(){
+    e.preventDefault()
+    e.stopPropagation()
     console.log(this.state)
   }
   handleChange(e){
