@@ -13,10 +13,10 @@ body{
 
   .#{$aname}-enter {
     opacity: 0.01;
-    transform: translateX(-130px) ;
+
     &.#{$aname}-enter-active {
       opacity: 1;
-      transform: translateX(0px) ;
+
       transition: all 500ms ease-in ;
     }
   }
@@ -25,9 +25,12 @@ body{
     opacity: 1;
     &.#{$aname}-leave-active {
       opacity: 0.01;
-      transform: translateX(-130px) scale(2);
       transition: all 500ms ease-in;
     }
   }
 }
 @include ReactCSSAnimation("items");
+@include ReactCSSAnimation("carousel");
+.carousel img{
+  position: absolute;
+}

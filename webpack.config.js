@@ -47,6 +47,16 @@ module.exports={
             }
           }
         ])
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+        use:{
+          loader:"url-loader",
+          options:{
+              limit:1000,
+              name:"images/[name].[ext]"
+          }
+        }
       }
     ]
   },
