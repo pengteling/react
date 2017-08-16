@@ -60,7 +60,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "12d89c5e8530287d7458"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "359224ad8f1cd92829da"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -11042,7 +11042,7 @@ var Carousel = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Carousel.__proto__ || Object.getPrototypeOf(Carousel)).call(this, props));
 
     _this.state = {
-      imageSrc: ["images/1.jpg", "images/2.jpg", "images/3.jpg", "images/4.jpg"],
+      imageSrc: [__webpack_require__(207), __webpack_require__(208), __webpack_require__(209), __webpack_require__(210)],
       currentIndex: 0
     };
     return _this;
@@ -25124,6 +25124,30 @@ function getTransitionProperties() {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 207 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/1.jpg";
+
+/***/ }),
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/2.jpg";
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/3.jpg";
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/4.jpg";
 
 /***/ })
 /******/ ]);
