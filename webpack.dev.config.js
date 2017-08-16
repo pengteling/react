@@ -35,17 +35,21 @@ module.exports={
       },
       {
         test: /\.scss$/,
-        use:ExtractTextPlugin.extract([
-          // {生产环境 需要CSS单独出来
-          //   loader:"style-loader"
-          // },
+        use:[
           {
-            loader:"css-loader"
+            loader:"style-loader"
           },
           {
-            loader:"sass-loader"
+            loader:"css-loader",
+            options:{sourceMap:true}
+          },
+          {
+            loader:"sass-loader",
+            options:{
+              sourceMap:true
+            }
           }
-        ])
+        ]
       },
       {
         test: /\.css$/,
@@ -79,7 +83,7 @@ module.exports={
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
+      'process.env.NODE_ENV': '"development"',
     }),
     new ExtractTextPlugin({
       filename:"css/[name].css",
@@ -93,6 +97,6 @@ module.exports={
     inline:true,
     hot:true,
     host:"0.0.0.0"
-  }
-  //devtool:"source-map"
+  },
+  devtool:"source-map"
 }

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --config ./webpack.dev.config.js",
     "build": "webpack"
   },
   "repository": {
@@ -41,6 +41,7 @@
     "node-sass": "^4.5.3",
     "css-loader": "^0.28.4",
     "url-loader": "^0.5.9",
-    "file-loader": "^0.11.2"
+    "file-loader": "^0.11.2",
+    "style-loader": "^0.18.2"
   }
 }
