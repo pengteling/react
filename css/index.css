@@ -2,43 +2,6 @@
 body {
   font-family: "\5FAE\8F6F\96C5\9ED1"; }
 
-.items-appear {
-  opacity: 0.01;
-  transition: all 2s ease-in; }
-  .items-appear.items-appear-active {
-    opacity: 1; }
-
-.items-enter {
-  opacity: 0.01; }
-  .items-enter.items-enter-active {
-    opacity: 1;
-    transition: all 500ms ease-in; }
-
-.items-leave {
-  opacity: 1; }
-  .items-leave.items-leave-active {
-    opacity: 0.01;
-    transition: all 500ms ease-in; }
-
-.carousel-appear {
-  opacity: 0.01;
-  transition: all 2s ease-in; }
-  .carousel-appear.carousel-appear-active {
-    opacity: 1; }
-
-.carousel-enter {
-  opacity: 0.01; }
-  .carousel-enter.carousel-enter-active {
-    opacity: 1;
-    transition: all 500ms ease-in; }
-
-.carousel-leave {
-  opacity: 1; }
-  .carousel-leave.carousel-leave-active {
-    opacity: 0.01;
-    transition: all 500ms ease-in; }
-
-.carousel img {
-  position: absolute; }
-
-/*# sourceMappingURL=index.css.map*/
+.item {
+  line-height: 30px;
+  color: #f0f; }
