@@ -25,10 +25,10 @@ class Carousel extends React.Component{
     super(props)
     this.state={
       imageSrc:[
-        "images/1.jpg",
-        "images/2.jpg",
-        "images/3.jpg",
-        "images/4.jpg",
+        require("./../images/1.jpg"),
+        require("./../images/2.jpg"),
+        require("./../images/3.jpg"),
+        require("./../images/4.jpg"),
       ],
       currentIndex:0
     }
@@ -45,7 +45,7 @@ class Carousel extends React.Component{
 
   render(){
     return(
-      <div  className="carousel">
+      <div className="carousel">
       <ImageCarousel imageSrc = {this.state.imageSrc[this.state.currentIndex]} />
       </div>
     )
