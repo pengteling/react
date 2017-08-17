@@ -1,34 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// export default class ItemList extends React.Component{
-//   constructor(props){
-//     super(props)
-//   }
-//   render(){
-//
-//     return(
-//       <div>
-//         {
-//           this.props.items.map((v,i)=>{
-//               return <div key={i}>{i}-{v}</div>
-//           })
-//         }
-//       </div>
-//     )
-//   }
-// }
-
-
-export default function ItemList(props) {
-  return(
-    <div>
-    {
-      props.items.map((v,i)=>{
-        return <div key={i} className="item">{i}-{v}</div>
-      })
+export default class ItemList extends React.Component{
+  constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
     }
-    </div>
-  )
-
+    handleChange(){
+        //this.props.onChange(this.props.label.id);
+        this.props.onChange();
+    }
+    render(){
+        return(
+            <div>
+            {this.props.label.text}
+            <input type="checkbox" checked={this.props.label.checked} onChange={this.handleChange} />
+            {this.props.label.checked? this.props.label.on : this.props.label.off}
+            </div>
+            )
+    }
 }
