@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ItemList from './ItemList';
-
+import { fromJS } from 'immutable';
 
 export default class App extends React.PureComponent{
   constructor(props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
       this.state= {
-          items:[
+          items:fromJS([
           {
               id :0,
               text:"你喜欢吃萝卜吗",
@@ -30,18 +30,23 @@ export default class App extends React.PureComponent{
               off:"不喜欢",
               checked:false
           }
-          ]
+        ])
       }
   }
-  handleChange(id){
+  handleChange(labelId){
 
       //let newitem = this.state.items;
       //console.log(id);
-      let newitem = this.state.items.concat([]);
-      newitem[id].checked = !newitem[id].checked;
+      // let newitem = this.state.items.concat([]);
+      // newitem[id].checked = !newitem[id].checked;
+      // this.setState({
+      //     items: newitem
+      // })
       this.setState({
-          items: newitem
-      })
+           items: this.state.items.setIn([labelId,"checked"], !this.state.items.getIn([labelId,"checked"]))
+           //items: this.state.items
+       })
+       console.log(this.state.items.setIn([labelId,"checked"], !this.state.items.getIn([labelId,"checked"])))
   }
   render(){
       let that = this;
