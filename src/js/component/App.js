@@ -1,44 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+
 import ItemList from './ItemList';
-export default class App extends React.PureComponent{
+export default class App extends React.Component{
     constructor(props){
       super(props)
       this.state={
-          items:["one","two"]
+          number:0
       }
-      this.handleClick=this.handleClick.bind(this)
+      this.handleChange=this.handleChange.bind(this)
     }
-    // shouldComponentUpdate(nextProps,nextState){
-    //   return true
+    // shouldComponentUpdate(){
+    //   return false
     // }
 
-    handleClick(){
-      // let {items} = this.state
-      // // console.log({items})
-      // // console.log(items)
-      // items.push("new-item")
-      // //console.log({items})
-      // this.setState({items})
-
-      // this.setState({
-      //   items: this.state.items.concat(['new-item']) //不会改变现有数组 是返回新的数组
-      // });
-
-      this.setState( (prevState)=>{
-        return {items:prevState.items.concat(['new-item'])}
-      });
-
+    handleChange(e){
+      this.setState({
+        number:e.target.value
+      })
     }
     render(){
+      let tempstr=[];
+      for(let i=1;i<=5000; ++i){
+        //console.log(i);
+        tempstr.push(<ItemList key={i} chooseNumber={this.state.number} number={i} ></ItemList>)
+      }
       return(
         <div>
-          <button onClick={this.handleClick}>点击Add</button>
-          <ItemList items={this.state.items} />
+        <input type="text" value={this.state.number} onChange={this.handleChange}/>
+        {tempstr}
         </div>
       )
     }
 }
 App.defaultProps ={
-  
+
 }

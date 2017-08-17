@@ -2,7 +2,14 @@
 body{
   font-family: "微软雅黑"
 }
-.item{
-  line-height: 30px;
-  color:#f0f;
+
+input{
+  display: block;
+}
+.numberbox{
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin:10px;
+  border: 1px solid;
 }
