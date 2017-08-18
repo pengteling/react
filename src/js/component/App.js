@@ -39,6 +39,9 @@ export default class App extends React.PureComponent{
       //console.log(id);
       let newitem = this.state.items.concat([]);
       newitem[id].checked = !newitem[id].checked;
+      //虽然执行concat后 数组是返回的新数组，但数组里面的项还是原来的对象
+      // console.log(newitem == this.state.items)
+      // console.log(newitem[0] === this.state.items[0])
       this.setState({
           items: newitem
       })

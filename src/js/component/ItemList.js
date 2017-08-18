@@ -10,11 +10,11 @@ export default class ItemList extends React.PureComponent{
         //this.props.onChange(this.props.label.id);
         this.props.onChange();
     }
-    shouldComponentUpdate(nextProps,nextState){
-      console.log(nextProps.label===this.props.label)
-      //console.log(this.props.label)
-      return this.props!=nextProps
-    }
+    // shouldComponentUpdate(nextProps,nextState){
+    //   //console.log(nextProps.label===this.props.label)
+    //   //console.log(this.props.label)
+    //   return this.props!=nextProps
+    // }
     render(){
         return(
             <div>
