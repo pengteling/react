@@ -16,9 +16,9 @@ export default class ItemList extends React.PureComponent{
     render(){
         return(
             <div>
-            {this.props.label.get("text")}
-            <input type="checkbox" checked={this.props.label.get("checked")} onChange={this.handleChange} />
-            {this.props.label.get("checked")? this.props.label.get("on") : this.props.label.get("off")}
+            {this.props.label.text}
+            <input type="checkbox" checked={this.props.label.checked} onChange={this.handleChange} />
+            {this.props.label.checked? this.props.label.on : this.props.label.off}
             </div>
             )
     }

@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ItemList from './ItemList';
-import { fromJS } from 'immutable';
+//import { fromJS } from 'immutable';
+import update from 'immutability-helper';
 
 export default class App extends React.PureComponent{
   constructor(props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
       this.state= {
-          items:fromJS([
+          items:[
           {
               id :0,
               text:"你喜欢吃萝卜吗",
@@ -30,11 +31,41 @@ export default class App extends React.PureComponent{
               off:"不喜欢",
               checked:false
           }
-        ])
+        ]
       }
   }
   handleChange(labelId){
+    update.extend('$auto', function(value, object) {
+      console.log()
+      return object ?
+        update(object, value):
+        update({}, value);
+    });
+    //const newState = update(this.state, {items: { 0 : {checked:{$apply:  (x)=> !x }} } })
 
+    // 采用immutability-helper的update方法 更新state 
+    const newState = update(this.state, {items: {$apply: (x)=>{
+      //console.log(x)
+      let newX = []
+      x.map((obj,i)=>{
+
+        if(i== labelId){
+          //console.log(obj)
+          let newobj = update( obj,  { checked: {$apply:  (x)=> !x  }})
+
+          //console.log(newobj)
+          newX.push(newobj)
+        }else{
+          newX.push(obj)
+        }
+      })
+      //console.log(newX)
+      return newX
+    } } })
+
+
+    //console.log(newState)
+    this.setState(newState)
       //let newitem = this.state.items;
       //console.log(id);
       // let newitem = this.state.items.concat([]);
@@ -42,11 +73,11 @@ export default class App extends React.PureComponent{
       // this.setState({
       //     items: newitem
       // })
-      this.setState({
-           items: this.state.items.setIn([labelId,"checked"], !this.state.items.getIn([labelId,"checked"]))
-           //items: this.state.items
-       })
-       console.log(this.state.items.setIn([labelId,"checked"], !this.state.items.getIn([labelId,"checked"])))
+      // this.setState({
+      //      items: this.state.items.setIn([labelId,"checked"], !this.state.items.getIn([labelId,"checked"]))
+      //      //items: this.state.items
+      //  })
+       //console.log(this.state.items.setIn([labelId,"checked"], !this.state.items.getIn([labelId,"checked"])))
   }
   render(){
       let that = this;
