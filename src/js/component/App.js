@@ -43,7 +43,7 @@ export default class App extends React.PureComponent{
     });
     //const newState = update(this.state, {items: { 0 : {checked:{$apply:  (x)=> !x }} } })
 
-    // 采用immutability-helper的update方法 更新state 
+    // 采用immutability-helper的update方法 更新state
     const newState = update(this.state, {items: {$apply: (x)=>{
       //console.log(x)
       let newX = []
@@ -66,6 +66,26 @@ export default class App extends React.PureComponent{
 
     //console.log(newState)
     this.setState(newState)
+
+
+    //或者
+
+    // this.setState(
+    //       state => update(state, {
+    //           items : {
+    //               $apply : function(x){
+    //                   console.log(x[labelId].checked);
+    //                   x[labelId].checked = !x[labelId].checked;
+    //                   console.log(x[labelId].checked);
+    //                  // console.log(x)
+    //                   return x;
+    //               }
+    //           }
+    //       })
+    //       ,function(){
+    //           console.log(this.state);
+    //       })
+
       //let newitem = this.state.items;
       //console.log(id);
       // let newitem = this.state.items.concat([]);
