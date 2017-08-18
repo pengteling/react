@@ -35,34 +35,31 @@ export default class App extends React.PureComponent{
       }
   }
   handleChange(labelId){
-    update.extend('$auto', function(value, object) {
-      console.log()
-      return object ?
-        update(object, value):
-        update({}, value);
+    // 采用immutability-helper的update.extend 扩展处理
+    update.extend('$doclick', function(value, object) {
+      // value 表示 $doclick:后跟的对象 可以理解为传参  object可以理解为 当前处理的对象
+       //console.log(value)
+       //console.log(object)
+      const newobject = object.map((obj,i)=>{
+         if(i== value.checkid){
+           //console.log(obj)
+          return update( obj,  { checked: {$apply:  (x)=> !x  }})
+         }
+         else{
+           return obj
+         }
+       })
+       console.log(newobject)
+       return newobject
+      // return object ?
+      //   update(object, value):
+      //   update({}, value);
     });
     //const newState = update(this.state, {items: { 0 : {checked:{$apply:  (x)=> !x }} } })
 
-    // 采用immutability-helper的update方法 更新state 
-    const newState = update(this.state, {items: {$apply: (x)=>{
-      //console.log(x)
-      let newX = []
-      x.map((obj,i)=>{
-
-        if(i== labelId){
-          //console.log(obj)
-          let newobj = update( obj,  { checked: {$apply:  (x)=> !x  }})
-
-          //console.log(newobj)
-          newX.push(newobj)
-        }else{
-          newX.push(obj)
-        }
-      })
-      //console.log(newX)
-      return newX
-    } } })
-
+    // 采用immutability-helper的update方法 更新state
+    const newState = update(this.state, {items: {$doclick: {checkid: labelId} } })
+    //console.log(newState)
 
     //console.log(newState)
     this.setState(newState)
