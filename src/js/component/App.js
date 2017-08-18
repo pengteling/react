@@ -7,8 +7,8 @@ export default class App extends React.PureComponent{
   constructor(props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
-      this.state= {
-          items:fromJS([
+      this.state= fromJS({
+          items:[
           {
               id :0,
               text:"你喜欢吃萝卜吗",
@@ -30,26 +30,33 @@ export default class App extends React.PureComponent{
               off:"不喜欢",
               checked:false
           }
-        ])
-      }
+        ]
+      })
   }
   handleChange(labelId){
+    //console.log(this.state.get("items"))
+    //console.log(this.state)
+    //console.log(this.state.setIn([items,labelId,"checked"], !this.state.items.getIn([items,labelId,"checked"])))
+    //console.log(this.state.getIn(["items",labelId,"checked"]))
+    //console.log(this.state.setIn(["items",labelId,"checked"], !this.state.getIn(["items",labelId,"checked"])))
+    console.log(this.state)
+    const newState= this.state.setIn(["items",labelId,"checked"], !this.state.getIn(["items",labelId,"checked"]))
+    console.log(this.state==newState)
+    console.log(this.state.get("items"))
+    console.log(newState.get("items"))
 
-      //let newitem = this.state.items;
-      //console.log(id);
-      // let newitem = this.state.items.concat([]);
-      // newitem[id].checked = !newitem[id].checked;
-      // this.setState({
-      //     items: newitem
-      // })
-      this.setState({
-           items: this.state.items.setIn([labelId,"checked"], !this.state.items.getIn([labelId,"checked"]))
-           //items: this.state.items
-       })
-       console.log(this.state.items.setIn([labelId,"checked"], !this.state.items.getIn([labelId,"checked"])))
+//replaceState 被淘汰 ，但是setState 是react插手，生成的是 object而非immutableJS对象 因此暂无好的办法
+    this.replaceState(newState)
+
+    //console.log(this.state.setIn(["items",labelId,"checked"], !this.state.getIn(["items",labelId,"checked"]))).get("items")
+    // this.setState(fromJS({
+    //   items: (this.state.setIn(["items",labelId,"checked"], !this.state.getIn(["items",labelId,"checked"]))).get("items")
+    // }))
   }
   render(){
       let that = this;
+      console.log(this.state)
+
       return(
           <div>
           {
@@ -57,7 +64,9 @@ export default class App extends React.PureComponent{
               //     //console.log(i)
               //     return <ItemList label={label} key={i} onChange={that.handleChange.bind(that,i)} />
               // })
-              this.state.items.map((label,i)=>{
+
+              this.state.get("items").map((label,i)=>{
+
                 return  <ItemList label={label} key={i} onChange={()=>{this.handleChange(i)}} />
               })
           }
