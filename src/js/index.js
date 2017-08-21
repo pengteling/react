@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+import todoApp from './reducers'
+import App from "./components/App";
 require("./../sass/style.scss");
-import MyButtonController from "./component/MyButtonController";
 
-
-
+let store =createStore(todoApp)
 
 ReactDOM.render(
-  <MyButtonController />,
-  document.getElementById('app')
+  <Provider store={store}>
+    <App/>
+  </Provider>,
+  document.getElementById('todoapp')
 );
