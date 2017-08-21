@@ -6,8 +6,8 @@ export default class MyButton extends React.PureComponent{
         super(props);
     }
     render(){
-      var items = this.props.items;
-      var itemHtml = items.map(function (listItem, i) {
+      let items = this.props.items;
+      let itemHtml = items.map(function (listItem, i) {
         return <li key={i}>{listItem}</li>;
       });
 

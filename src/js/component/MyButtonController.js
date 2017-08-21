@@ -27,7 +27,7 @@ export default class MyButtonController extends React.PureComponent{
     })
   }
   createNewItem(e){
-    ButtonActions.addNewItem("new item")
+    ButtonActions.addNewItem(prompt("你好，请输入项目"))
   }
   render(){
     return <MyButton items={this.state.items} onClick ={this.createNewItem} />
