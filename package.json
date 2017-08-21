@@ -28,7 +28,8 @@
     "object-assign": "^4.1.1",
     "events": "^1.1.1",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "prop-types": "^15.5.10"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
