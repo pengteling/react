@@ -1,38 +1,68 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import {Provider} from 'react-redux'
-import {createStore} from 'redux'
+import { combineReducers, createStore } from 'redux'
 
 require("./../sass/style.scss");
 
 //pure function  = reducer
-function counter(state=0, action) {
+function visibilityFilter(state = 'SHOW_ALL', action) {
   switch (action.type) {
-    case "INCREMENT":
-      return state+1
-    case "DECREMENT":
-      return state-1
+    case 'SET_VISIBILITY_FILTER':
+      return action.filter
     default:
       return state
   }
 }
 
-let store = createStore(counter)
+function todos(state = [], action) {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [
+        ...state,
+        {
+          text: action.text,
+          completed: false
+        }
+      ]
+    case 'COMPLETE_TODO':
+      return state.map((todo, index) => {
+        if (index === action.index) {
+          return Object.assign({}, todo, {
+            completed: true
+          })
+        }
+        return todo
+      })
+    default:
+      return state
+  }
+}
+
+
+const reducer = combineReducers({ visibilityFilter, todos })
+const store = createStore(reducer)
+
+
 store.subscribe(
   ()=>console.log(store.getState())
 )
 store.dispatch({
-  type: "INCREMENT"
+  type: "ADD_TODO",
+  text: "fy"
 })
 store.dispatch({
-  type: "DECREMENT"
+  type: "ADD_TODO",
+  text: "fy2"
 })
 store.dispatch({
-  type: "INCREMENT"
+  type: "SET_VISIBILITY_FILTER",
+  filter: "SHOW_COMPLETED"
 })
-store.dispatch({
-  type: "FU"
-})
+// store.dispatch({
+//   type: "SET_VISIBILITY_FILTER3",
+//   filter: "SHOW_COMPLETED"
+// })
 // ReactDOM.render(
 //   <Provider store={store}>
 //     <App/>
