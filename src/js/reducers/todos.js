@@ -10,10 +10,21 @@ const todos = (state = [], action) => {
         }
       ]
     case 'TOGGLE_TODO':
-      return state.map(todo =>
-        (todo.id === action.id)
-          ? {...todo, completed: !todo.completed}
-          : todo
+      return state.map(
+        todo =>
+          todo.id === action.id ?
+          { ...todo, completed: !todo.completed } : todo //需要stage-0 以上支持
+
+
+        // { //console.log(state)
+        //   console.log({...todo, completed: !todo.completed} )
+        //   if (todo.id  === action.id) {
+        //           return Object.assign({}, todo, {
+        //             completed: !todo.completed
+        //           })
+        //         }
+        //         return todo
+        //            }
       )
     default:
       return state
