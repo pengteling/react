@@ -1,68 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import {Provider} from 'react-redux'
-import { combineReducers, createStore } from 'redux'
+import { createStore } from 'redux'
+import todoApp from './reducers'
+let store = createStore(todoApp) //第二个参数可以传默认store
 
-require("./../sass/style.scss");
+console.log(store.getState())
 
-//pure function  = reducer
-function visibilityFilter(state = 'SHOW_ALL', action) {
-  switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return action.filter
-    default:
-      return state
-  }
-}
-
-function todos(state = [], action) {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return [
-        ...state,
-        {
-          text: action.text,
-          completed: false
-        }
-      ]
-    case 'COMPLETE_TODO':
-      return state.map((todo, index) => {
-        if (index === action.index) {
-          return Object.assign({}, todo, {
-            completed: true
-          })
-        }
-        return todo
-      })
-    default:
-      return state
-  }
-}
-
-
-const reducer = combineReducers({ visibilityFilter, todos })
-const store = createStore(reducer)
-
-
-store.subscribe(
-  ()=>console.log(store.getState())
+let unsubscribe = store.subscribe(() =>
+  console.log(store.getState())
 )
-store.dispatch({
-  type: "ADD_TODO",
-  text: "fy"
-})
-store.dispatch({
-  type: "ADD_TODO",
-  text: "fy2"
-})
-store.dispatch({
-  type: "SET_VISIBILITY_FILTER",
-  filter: "SHOW_COMPLETED"
-})
-// store.dispatch({
-//   type: "SET_VISIBILITY_FILTER3",
-//   filter: "SHOW_COMPLETED"
-// })
+
+import {
+  addTodo,
+  toggleTodo,
+  setVisibilityFilter,
+  VisibilityFilters
+} from './actions'
+
+// Dispatch some actions
+store.dispatch(addTodo('Learn about actions'))
+store.dispatch(addTodo('Learn about reducers'))
+store.dispatch(addTodo('Learn about store'))
+store.dispatch(toggleTodo(0))
+store.dispatch(toggleTodo(1))
+store.dispatch(setVisibilityFilter(VisibilityFilters.SHOW_COMPLETED))
+
+// Stop listening to state updates
+unsubscribe()
+
+
 // ReactDOM.render(
 //   <Provider store={store}>
 //     <App/>
