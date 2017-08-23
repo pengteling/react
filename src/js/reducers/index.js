@@ -1,62 +1,17 @@
-// import { combineReducers } from 'redux'
-// import {
-//   ADD_TODO,
-//   TOGGLE_TODO,
-//   SET_VISIBILITY_FILTER,
-//   VisibilityFilters
-// } from '../actions'
-// const { SHOW_ALL } = VisibilityFilters
-//
-// function visibilityFilter(state = SHOW_ALL, action) {
-//   switch (action.type) {
-//     case SET_VISIBILITY_FILTER:
-//       return action.filter
-//     default:
-//       return state
-//   }
-// }
-//
-// function todos(state = [], action) {
-//   switch (action.type) {
-//     case ADD_TODO:
-//       return [
-//         ...state,
-//         {
-//           id: action.id,
-//           text: action.text,
-//           completed: false
-//         }
-//       ]
-//     case TOGGLE_TODO:
-//       return state.map((todo, index) => {
-//         if (index === action.index) {
-//           return Object.assign({}, todo, {
-//             completed: !todo.completed
-//           })
-//         }
-//         return todo
-//       })
-//     default:
-//       return state
-//   }
-// }
-//
-// const todoApp = combineReducers({
-//   visibilityFilter,
-//   todos
-// })
-//
-// export default todoApp
-
-
-
-import { combineReducers } from 'redux'
-import todos from './todos'
-import visibilityFilter from './visibilityFilter'
-
-const todoApp = combineReducers({
-  todos,
-  visibilityFilter
+import {combineReducers } from "redux"
+import counterApp from "./counterApp"
+import toggleApp from "./toggleApp"
+const doApp = combineReducers({
+  counterApp,
+  toggleApp
 })
 
-export default todoApp
+export default doApp
+
+
+// 合并reducers后的state其实就是下面的组合
+// {
+//   counterApp: {counter:0},
+//   toggleApp: true
+//
+// }
