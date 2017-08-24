@@ -5,6 +5,6 @@ import BasicExample from "./BasicExample"
 
 
 ReactDOM.render(
-  <AuthExample />,
+  <BasicExample />,
   document.getElementById('root')
 )

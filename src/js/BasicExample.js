@@ -52,7 +52,9 @@ const AuthButton = withRouter(({ history }) => (
   )
 ))
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  console.log(rest)
+  return (
   <Route {...rest} render={props => (
     fakeAuth.isAuthenticated ? (
       <Component {...props}/>
@@ -63,22 +65,32 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       }}/>
     )
   )}/>
-)
+)}
 
 const Public = () => <h3>Public</h3>
 const Protected = () => <h3>Protected</h3>
 
 class Login extends React.Component {
-  state = {
-    redirectToReferrer: false
+  // state = {
+  //   redirectToReferrer: false
+  // }
+  constructor(props){
+    super(props)
+    this.state={
+      redirectToReferrer: false
+    }
+    this.login=this.login.bind(this)
   }
-
-  login = () => {
+  // login = () => {
+  //   fakeAuth.authenticate(() => {
+  //     this.setState({ redirectToReferrer: true })
+  //   })
+  // }
+  login(){
     fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true })
-    })
+        this.setState({ redirectToReferrer: true })
+      })
   }
-
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } }
     const { redirectToReferrer } = this.state
