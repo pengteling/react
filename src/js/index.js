@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import GalleryByReactApp from "./components/GalleryByReactApp"
+import Header from "./components/Header"
 //import $ from "jquery"
 ReactDOM.render(
-  <GalleryByReactApp />,
+  <Header />,
   document.getElementById('root')
 )
