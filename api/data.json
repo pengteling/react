@@ -1,4 +1,9 @@
-{
+[
+  {
   "username":"ptl",
   "age":35
+},{
+  "username":"yhx",
+  "age":35
 }
+]
