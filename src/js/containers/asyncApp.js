@@ -19,6 +19,7 @@ class AsyncApp extends Component {
   componentDidMount() {
     const { dispatch, selectedSubreddit } = this.props
     dispatch(fetchPostsIfNeeded(selectedSubreddit))
+    //{console.log( this.props)}
   }
 
   componentDidUpdate(prevProps) {
@@ -43,12 +44,13 @@ class AsyncApp extends Component {
 
   render() {
     const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props
+    //console.log(posts.length)
     return (
       <div>
         <Picker
           value={selectedSubreddit}
           onChange={this.handleChange}
-          options={['reactjs', 'frontend']}
+          options={['data', 'data2']}
         />
         <p>
           {lastUpdated &&
