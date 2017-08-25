@@ -1,4 +1,7 @@
 .components-header{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   box-sizing: border-box;
   padding:15px 25px;
   border-bottom: #ccc 1px solid;
@@ -8,6 +11,7 @@
     text-indent: 20px;
   }
   .logo{
+    flex:0 0 auto;
     width:40px;
   }
 }
