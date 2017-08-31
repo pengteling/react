@@ -1,4 +1,4 @@
-var MUSIC_LIST = [{
+export const MUSIC_LIST = [{
   id: 1,
   title: '天使中的魔鬼',
   artist: '田馥甄',
