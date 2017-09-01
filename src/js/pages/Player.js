@@ -40,12 +40,22 @@ class Player extends React.Component{
         volume: e.jPlayer.options.volume *100,
         leftTime: this.formatTime(this.duration - currentTime)
       })
+      // 一开始时间为0
+      // if(this.duration - currentTime <=0) {
+      //   //this.next()
+      //   console.log(this.duration - currentTime)
+      // }
 
+    })
+
+    $("#jplayer").on($.jPlayer.event.ended,e=>{
+      this.next()
     })
   }
   componentWillUnmount(){
     console.log("off");
     $("#jplayer").off($.jPlayer.event.timeupdate) //一定要解绑，否则该组件卸载后 还会更新则报错
+    $("#jplayer").off($.jPlayer.event.ended)
   }
   progressChangeHandler(progress){
     //console.log(progress)
