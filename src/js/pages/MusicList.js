@@ -11,7 +11,7 @@ class MusciList extends React.Component{
     listEle = this.props.musicList.map((item,i)=>{
       //console.log(this.props.currentMusciItem)
       //console.log(item)
-      return <MusicListItem key={i} musicItem={item} focus={ item==this.props.currentMusicItem } onChangMusicItem={this.props.onChangMusicItem}/>
+      return <MusicListItem key={i} musicItem={item} focus={ item==this.props.currentMusicItem } onChangMusicItem={this.props.onChangMusicItem} onDeleteMusicItem={this.props.onDeleteMusicItem}/>
     })
     return (
       <div>

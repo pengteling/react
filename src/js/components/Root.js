@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom'
 import Header from "./Header"
 import Player from "./../pages/Player"
 import MusicList from "./../pages/MusicList"
+import MusicItem from './../pages/MusicItem'
 import {MUSIC_LIST} from "../config/MusciList"
+import update from 'immutability-helper'
 
 import {
   BrowserRouter as Router,
@@ -12,21 +14,37 @@ import {
 //import Progress from "./Progress"
 
 //import $ from "jquery"
-class Root extends React.Component{
+class Root extends React.PureComponent{
   constructor(props){
     super(props)
     this.state ={
       musicList: MUSIC_LIST,
-      currentMusicItem:MUSIC_LIST[1]
+      currentMusicItem:MUSIC_LIST[0],
+      repeatType:'cycle'
     }
     this.changeMusicItemHandler=this.changeMusicItemHandler.bind(this)
     this.pervNextHandler=this.pervNextHandler.bind(this)
     this.playFile = this.playFile.bind(this)
+    this.deleteMusicItemHandler=this.deleteMusicItemHandler.bind(this)
+    this.changeRepeatHandler = this.changeRepeatHandler.bind(this)
   }
   playFile(file){
     $("#jplayer").jPlayer('setMedia',{
       mp3: file
     }).jPlayer("play")
+  }
+  changeRepeatHandler(){
+    this.oldMusicItem = this.state.currentMusicItem
+    let new_repeatType="cycle"
+    if(this.state.repeatType == 'cycle'){
+      new_repeatType="once"
+    }else if(this.state.repeatType=="once"){
+      new_repeatType ="random"
+    }
+
+    this.setState({
+      repeatType: new_repeatType
+    })
   }
   componentDidMount(){
     let file= this.state.currentMusicItem.file
@@ -45,52 +63,71 @@ class Root extends React.Component{
   componentDidUpdate(){
     //console.log(this.state.currentMusicItem.file)
     let file= this.state.currentMusicItem.file
-    this.playFile(file)
+
+    //console.log(this.oldMusicItem.file )
+    //console.log(this.state.currentMusicItem.file)
+    if(this.oldMusicItem != this.state.currentMusicItem){
+      this.playFile(file)
+    }
+    //this.playFile(file)
   }
-    // $("#jplayer").on($.jPlayer.event.timeupdate,e=>{
-    //   this.duration = e.jPlayer.status.duration
-    //   this.setState({
-    //     // progress:Math.round(e.jPlayer.status.currentTime)
-    //     progress:Math.round(e.jPlayer.status.currentPercentAbsolute)
-    //   })
-    // })
-  //}
-  // componentWillUnMout(){
-  //   //console.log("off");
-  //   $("#jplayer").off($.jPlayer.event.timeupdate)
-  // }
-  // progressChange(progress){
-  //   //console.log(progress)
-  //   $("#jplayer").jPlayer('play',this.duration * progress)
-  // }
-  // render(){
-  //   return (
-  //     <div>
-  //       <Header />
-  //       <Progress progress={this.state.progress} onProgressChange={this.progressChange} barColor="red"/>
-  //       <div id="jplayer"></div>
-  //     </div>
-  //   )
-  // }
+  shouldComponentUpdate(){
+    if(this.state.musicList.length>0){  //列表为空时 下一首会报错
+      return true
+    }else{
+      return false
+    }
+  }
   changeMusicItemHandler(musicItem){
+    this.oldMusicItem = this.state.currentMusicItem
     this.setState({
       currentMusicItem:musicItem
     })
   }
-  pervNextHandler(type){
-    console.log(type)
-    //this.setState({})
-    let currentIndex = this.state.musicList.indexOf(this.state.currentMusicItem)
-    let num = this.state.musicList.length
-    if(type=="prev"){
-      currentIndex = (currentIndex - 1 + num) % num
-    }else{
-      currentIndex = (currentIndex + 1 ) % num
-    }
+  deleteMusicItemHandler(musicItem){
+    //e.stopPropagation()
+    this.oldMusicItem = this.state.currentMusicItem
+    if(musicItem == this.state.currentMusicItem){
 
-    this.setState({
-      currentMusicItem: this.state.musicList[currentIndex]
+      this.pervNextHandler()
+    }
+    let new_musicList = update(this.state.musicList,{
+        $apply:(x)=> (x.filter((n)=>n!=musicItem))
     })
+    //console.log(new_musicList)
+    this.setState({
+      //musicList:this.state.musicList.filter((n)=>n!= musicItem)
+      musicList:new_musicList
+    })
+    //this.setState(newState)
+  }
+  pervNextHandler(type){
+    this.oldMusicItem=""
+    //console.log(type)
+    //this.setState({})
+    //if(this.state.musicList.length>0){
+      let currentIndex = this.state.musicList.indexOf(this.state.currentMusicItem)
+      let num = this.state.musicList.length
+      let repeatType = this.state.repeatType
+      if(repeatType == "cycle" || repeatType=="once"){
+        if(type=="prev"){
+          currentIndex = (currentIndex - 1 + num) % num
+        }else{
+          currentIndex = (currentIndex + 1 ) % num
+        }
+      }
+      else{
+
+        //currentIndex =  Math.round(Math.random() * num +0.5) -1
+        currentIndex = Math.floor(Math.random()*num)
+        //console.log(currentIndex)
+      }
+
+
+      this.setState({
+        currentMusicItem: this.state.musicList[currentIndex]
+      })
+    //}
   }
   render(){
     return(
@@ -98,11 +135,16 @@ class Root extends React.Component{
       <div>
         <Header />
         <Route exact path ="/" render = {() =>(
-          <Player currentMusicItem={this.state.currentMusicItem}  onPervNext={this.pervNextHandler}></Player>
+          <Player repeatType={this.state.repeatType} changeRepeatHandler={this.changeRepeatHandler} currentMusicItem={this.state.currentMusicItem}  onPervNext={this.pervNextHandler}></Player>
         )}>
         </Route>
         <Route path ="/list" render = {() =>(
-          <MusicList currentMusicItem={this.state.currentMusicItem} musicList = {this.state.musicList} onChangMusicItem={this.changeMusicItemHandler}/>
+          <MusicList currentMusicItem={this.state.currentMusicItem} musicList = {this.state.musicList} onChangMusicItem={this.changeMusicItemHandler} onDeleteMusicItem={this.deleteMusicItemHandler}/>
+        )}>
+        </Route>
+
+        <Route path ="/item" render = {()=>(
+          <MusicItem musicItem ={this.state.currentMusicItem}/>
         )}>
         </Route>
       </div>

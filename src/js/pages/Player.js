@@ -4,7 +4,8 @@ import Progress from "../components/Progress"
 import "./Player.scss"
 import {  Link } from 'react-router-dom'
 
-class Player extends React.Component{
+
+class Player extends React.PureComponent{
 
   constructor(props){
     super(props)
@@ -27,6 +28,9 @@ class Player extends React.Component{
     let ss = parseInt (t % 60)
     ss = ss <10 ? `0${mm}`:ss
     return mm +':'+ ss
+  }
+  componentDidUpdate(){
+    //console.log("player update")
   }
   componentDidMount(){
     $("#jplayer").on($.jPlayer.event.timeupdate,e=>{
@@ -53,7 +57,7 @@ class Player extends React.Component{
     })
   }
   componentWillUnmount(){
-    console.log("off");
+    //console.log("off");
     $("#jplayer").off($.jPlayer.event.timeupdate) //一定要解绑，否则该组件卸载后 还会更新则报错
     $("#jplayer").off($.jPlayer.event.ended)
   }
@@ -62,7 +66,7 @@ class Player extends React.Component{
     $("#jplayer").jPlayer('play',this.duration * progress)
   }
   changeVolumeHandler(progress){
-    console.log(progress)
+    //console.log(progress)
     $("#jplayer").jPlayer('volume',progress)
   }
   play(){
@@ -90,7 +94,7 @@ class Player extends React.Component{
               <h1 className="caption"><Link to="/list">我的私人音乐坊 &gt;</Link></h1>
               <div className="mt20 row">
                 <div className="controll-wrapper">
-                  <h2 className="music-title">{this.props.currentMusicItem.title}</h2>
+                  <h2 className="music-title"><Link to="/item">{this.props.currentMusicItem.title}</Link></h2>
                   <h3 className="music-artist mt10">{this.props.currentMusicItem.artist}</h3>
                   <div className="row mt20">
                     <div className="left-time -col-auto">-{this.state.leftTime}</div>
@@ -120,12 +124,12 @@ class Player extends React.Component{
                       <i className="icon next ml20" onClick={this.next}></i>
                     </div>
                     <div className="-col-auto">
-                      <i className={`icon repeat-${this.props.repeatType}`} onClick={this.changeRepeat}></i>
+                      <i className={`icon repeat-${this.props.repeatType}`} onClick={this.props.changeRepeatHandler}></i>
                     </div>
                   </div>
                 </div>
                 <div className="-col-auto cover">
-                  <img src={this.props.currentMusicItem.cover} alt={this.props.currentMusicItem.title} />
+                  <img className={`${this.state.isPlay ? 'play' : 'pause'}`} src={this.props.currentMusicItem.cover} alt={this.props.currentMusicItem.title} />
                 </div>
               </div>
           </div>

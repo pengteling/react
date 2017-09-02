@@ -18,6 +18,16 @@
 			width: 180px;
 			height: 180px;
 			border-radius: 50%;
+			&.play{
+				animation-play-state: running;
+			}
+			&.pause{
+				animation-play-state:paused;
+			}
+			animation: rotate 15s linear forwards infinite;
+			@keyframes rotate {
+				100%{transform: rotate(360deg);}
+			}
 		}
 	}
 	.volume-container {
