@@ -12,6 +12,7 @@ const App = ()=>(
     <div>
       <Header/>
       <ShowPlayer />
+      
     </div>
   </Router>
 )

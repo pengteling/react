@@ -1,12 +1,12 @@
 const player = (state={
   volume:20,
-  isPlay: false,
+  isPlay: true,
   progress:0,
   leftTime:"-"
 },action) => {
   switch (action.type) {
-    case "1":
-      return state
+    case "PLAY_PAUSE":
+      return {...state,isPlay:!state.isPlay}
 
     default:
       return state

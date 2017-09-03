@@ -27,7 +27,7 @@ import {  Link } from 'react-router-dom'
 //
 // }
 
-const Player = ({musicList,player,list,play,playNext}) => {
+const Player = ({musicList,player,list,playNext,playPrev,play,pause}) => {
       let currentMusicItem = musicList[list.currentIndex]
       //play()
       //playNext()
@@ -62,8 +62,10 @@ const Player = ({musicList,player,list,play,playNext}) => {
                             </div>
                             <div className="mt35 row">
                               <div>
-                                <i className="icon prev" onClick=""></i>
-                                <i className={`icon ml20 ${player.isPlay ? 'pause' : 'play'}`} onClick=""></i>
+                                <i className="icon prev" onClick={ ()=>{playPrev()}}></i>
+                                <i className={`icon ml20 ${player.isPlay ? 'pause' : 'play'}`} onClick={()=>{
+                                  player.isPlay?pause():play()
+                                }}></i>
                                 <i className="icon next ml20" onClick={ ()=>{playNext()} }></i>
                               </div>
                               <div className="-col-auto">

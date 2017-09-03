@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { playNext } from '../actions'
+import { playNext,playPrev,playPause } from '../actions'
 import {actions} from 'react-jplayer'
 import Player from '../components/Player'
 
@@ -16,12 +16,18 @@ const mapDispatchToProps = dispatch => {
     playNext: () => {
       dispatch(playNext())
     },
-    play: ()=>{
-      dispatch(actions.play("AudioPlayer"))
+    playPrev: () => {
+      dispatch(playPrev())
     },
-    setMedia:(media)=>{
-      dispatch(actions.setMedia("AudioPlayer",media))
-    }
+    play: ()=>{
+      //dispatch(actions.play("AudioPlayer"))
+      dispatch(playPause())
+    },
+    pause: ()=>{
+      //dispatch(actions.pause("AudioPlayer"))
+      dispatch(playPause())
+    },
+
   }
 }
 
