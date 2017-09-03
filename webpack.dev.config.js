@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 module.exports={
   entry:{
-    "index":"./src/js/index.js"
+    "index":"./src/index.js"
   },
   output:{
     path:path.resolve(__dirname ,"./dist"),
