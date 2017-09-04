@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 //import { playNext } from '../actions'
 import {actions} from 'react-jplayer'
+//import LoadAudioPlayer from '../components/LoadAudioPlayer'
 import LoadAudioPlayer from '../components/LoadAudioPlayer'
 
 const mapStateToProps = state =>{

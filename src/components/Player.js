@@ -27,7 +27,7 @@ import {  Link } from 'react-router-dom'
 //
 // }
 
-const Player = ({musicList,player,list,playNext,playPrev,play,pause}) => {
+const Player = ({musicList,player,list,playNext,playPrev,play,pause,changeRepeatType}) => {
       let currentMusicItem = musicList[list.currentIndex]
       //play()
       //playNext()
@@ -69,7 +69,7 @@ const Player = ({musicList,player,list,playNext,playPrev,play,pause}) => {
                                 <i className="icon next ml20" onClick={ ()=>{playNext()} }></i>
                               </div>
                               <div className="-col-auto">
-                                <i className={`icon repeat-${list.repeatType}`} onClick=""></i>
+                                <i className={`icon repeat-${list.repeatType}`} onClick={()=>changeRepeatType()}></i>
                               </div>
                             </div>
                           </div>

@@ -13,10 +13,13 @@ import React from 'react'
 
 //export default MusicListItem
 
-export default ({musicItem,focus,onChangMusicItem,onDeleteMusicItem}) => {
+export default ({id,musicItem,focus,onChangMusicItem,onDeleteMusicItem}) => {
   //console.log(focus)
       return (
-        <li className={`components-listitem row ${ focus ? 'focus':''}`} onClick={()=>onChangMusicItem(musicItem)}>
+        <li className={`components-listitem row ${ focus ? 'focus':''}`} onClick={()=>{
+          if(!focus) //防止点击当前歌曲 重新开始
+          onChangMusicItem(id)
+        }}>
           <p>{musicItem.title} - {musicItem.artist}</p>
           <p className="-col-auto delete" onClick={(e)=>{
             e.stopPropagation()

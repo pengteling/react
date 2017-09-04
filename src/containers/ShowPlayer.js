@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { playNext,playPrev,playPause } from '../actions'
+import { playNext,playPrev,playPause,changeRepeatType } from '../actions'
 import {actions} from 'react-jplayer'
 import Player from '../components/Player'
 
@@ -27,6 +27,9 @@ const mapDispatchToProps = dispatch => {
       //dispatch(actions.pause("AudioPlayer"))
       dispatch(playPause())
     },
+    changeRepeatType:()=>{
+      dispatch(changeRepeatType())
+    }
 
   }
 }

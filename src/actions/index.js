@@ -13,3 +13,14 @@ export const playPause = () => {
     type: 'PLAY_PAUSE'
   }
 }
+export const changeRepeatType = ()=>{
+  return {
+    type: 'CHANGE_REPEAT_TYPE'
+  }
+}
+export const changeMusic = (item)=>{
+  return {
+    type: 'CHANGE_MUSIC',
+    item
+  }
+}

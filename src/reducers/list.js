@@ -22,6 +22,18 @@ const list = (state = {
         prevIndex = (state.currentIndex - 1 +num) % num
       }
       return {...state, currentIndex: prevIndex }
+    case 'CHANGE_REPEAT_TYPE':
+      let old_repeatType = state.repeatType
+      let new_repeatType = 'cycle'
+      if(old_repeatType == 'cycle'){
+        new_repeatType = 'once'
+      }else if(old_repeatType == 'once'){
+        new_repeatType = 'random'
+      }
+      
+      return {...state,repeatType:new_repeatType}
+    case 'CHANGE_MUSIC':
+      return {...state, currentIndex: action.item}
     default:
       return state
   }
