@@ -14,7 +14,7 @@ const Header = ()=>{
         <h1 className="caption">React Music Player</h1>
 
 
-        <AudioPlayer />
+      
         <ShowLoadAudioPlayer />
       </div>
 
