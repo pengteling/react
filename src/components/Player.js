@@ -77,7 +77,7 @@ class Player extends React.Component{
                         <h1 className="caption"><Link to="/list">我的私人音乐坊 &gt;</Link></h1>
                         <div className="mt20 row">
                           <div className="controll-wrapper">
-                            <h2 className="music-title">{currentMusicItem.title}</h2>
+                            <h2 className="music-title"><Link to="/lrc">{currentMusicItem.title}</Link></h2>
                             <h3 className="music-artist mt10">{currentMusicItem.artist}</h3>
                             <div className="row mt20">
                               <div className="left-time -col-auto">{jPlayers.AudioPlayer.durationText}</div>

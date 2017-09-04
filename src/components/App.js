@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './Header'
 import ShowPlayer from '../containers/ShowPlayer'
 import ShowList from '../containers/ShowList'
-import Lrc from './Lrc'
+import ShowLrc from '../containers/ShowLrc'
 import {
   BrowserRouter as Router,
   Route
@@ -21,7 +21,7 @@ const App = ()=>(
       )}>
       </Route>
       <Route path ="/lrc" render = {() =>(
-        <Lrc />
+        <ShowLrc />
       )}>
       </Route>
 
