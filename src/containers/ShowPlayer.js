@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
-import { playNext,playPrev,playPause,changeRepeatType } from '../actions'
+import { playNext,playPrev,playPause,changeRepeatType,changeProgress,changeVolume } from '../actions'
 import {actions} from 'react-jplayer'
 import Player from '../components/Player'
 
 const mapStateToProps = state =>{
   return{
-    musicList: state.musicList,
     player: state.player,
-    list:state.list
+    list:state.list,
+    jPlayers:state.jPlayers
   }
 }
 
@@ -29,6 +29,12 @@ const mapDispatchToProps = dispatch => {
     },
     changeRepeatType:()=>{
       dispatch(changeRepeatType())
+    },
+    changeProgress:(progress)=>{
+      dispatch(changeProgress(progress))
+    },
+    changeVolume:(progress)=>{
+      dispatch(changeVolume(progress))
     }
 
   }

@@ -7,11 +7,11 @@ class MusciList extends React.Component{
   }
   render(){
     let listEle = null;
-    listEle = this.props.musicList.map((item,i)=>{
+    listEle = this.props.list.musicList.map((item,i)=>{
       //console.log(this.props.musicList)
       //console.log(item)
 
-      return <MusicListItem key={i} id={i} musicItem={item} focus={ i==this.props.list.currentIndex } onChangMusicItem={this.props.onChangMusicItem} onDeleteMusicItem={this.props.onDeleteMusicItem}/>
+      return <MusicListItem key={i} musicItem={item} focus={ item==this.props.list.currentMusicItem } onChangMusicItem={this.props.onChangMusicItem} onDeleteMusicItem={this.props.onDeleteMusicItem}/>
     })
     return (
       <div>

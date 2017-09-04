@@ -26,27 +26,67 @@ import {  Link } from 'react-router-dom'
 //   }
 //
 // }
+class Player extends React.Component{
+  constructor(props){
+    super(props)
+  }
 
-const Player = ({musicList,player,list,playNext,playPrev,play,pause,changeRepeatType}) => {
-      let currentMusicItem = musicList[list.currentIndex]
-      //play()
-      //playNext()
-      return (
+  shouldComponentUpdate(nextProps){
+    //console.log("shouldComponentUpdate")
+    if (nextProps.jPlayers.AudioPlayer.currentPercentAbsolute>=100){
+      console.log(nextProps.jPlayers.AudioPlayer.currentPercentAbsolute)
+      //this.props.pause()
+
+      //this.props.pause()
+      this.props.playNext()
+      return false
+
+    }
+    return true
+  }
+  componentWillUnmount(){
+    console.log("componentWillUnmount")
+  }
+
+  render(){
+    //console.log(this.props)
+    let jPlayers = this.props.jPlayers
+    let musicList = this.props.list.musicList
+    let player = this.props.player
+    let list = this.props.list
+    let playNext = this.props.playNext
+    let playPrev = this.props.playPrev
+    let play = this.props.play
+    let pause = this.props.pause
+    let changeRepeatType = this.props.changeRepeatType
+    let changeProgress = this.props.changeProgress
+    let changeVolume = this.props.changeVolume
+    let currentMusicItem = this.props.list.currentMusicItem
+//
+// const Player = ({jPlayers,musicList,player,list,playNext,playPrev,play,pause,changeRepeatType,changeProgress,changeVolume}) => {
+//       let currentMusicItem = musicList[list.currentIndex]
+//       //play()
+//       //playNext()
+//       //console.log(jPlayers.AudioPlayer.durationText)
+//       // if (jPlayers.AudioPlayer.currentPercentAbsolute>=99.9){
+//       //   playNext()
+//       // }
+       return (
 
                 <div className="player-page">
                         <h1 className="caption"><Link to="/list">我的私人音乐坊 &gt;</Link></h1>
                         <div className="mt20 row">
                           <div className="controll-wrapper">
-                            <h2 className="music-title"><Link to="/item">{currentMusicItem.title}</Link></h2>
+                            <h2 className="music-title">{currentMusicItem.title}</h2>
                             <h3 className="music-artist mt10">{currentMusicItem.artist}</h3>
                             <div className="row mt20">
-                              <div className="left-time -col-auto">-{player.leftTime}</div>
+                              <div className="left-time -col-auto">{jPlayers.AudioPlayer.durationText}</div>
                               <div className="volume-container">
                                 <i className="icon-volume rt" style={{top: 5, left: -5}}></i>
                                 <div className="volume-wrapper">
                                   <Progress
-                            progress={player.volume}
-                            onProgressChange=""
+                            progress={jPlayers.AudioPlayer.volume *100}
+                            onProgressChange={ (progress)=>{changeVolume(progress)} }
                             barColor='#aaa'
                                   >
                                   </Progress>
@@ -55,8 +95,8 @@ const Player = ({musicList,player,list,playNext,playPrev,play,pause,changeRepeat
                             </div>
                             <div style={{height: 10, lineHeight: '10px'}}>
                               <Progress
-                        progress={player.progress}
-                        onProgressChange=""
+                        progress={jPlayers.AudioPlayer.currentPercentAbsolute}
+                        onProgressChange={ (progress)=>{changeProgress(progress)}}
                               >
                               </Progress>
                             </div>
@@ -82,5 +122,6 @@ const Player = ({musicList,player,list,playNext,playPrev,play,pause,changeRepeat
 
 
       )
+      }
 }
 export default Player

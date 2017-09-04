@@ -1,11 +1,10 @@
 import { connect } from 'react-redux'
-import { playNext,playPrev,playPause,changeMusic } from '../actions'
+import { playNext,playPrev,playPause,changeMusic,deleteMusic } from '../actions'
 import {actions} from 'react-jplayer'
 import List from '../components/List'
 
 const mapStateToProps = state =>{
   return{
-    musicList: state.musicList,
     player: state.player,
     list:state.list
   }
@@ -16,7 +15,9 @@ const mapDispatchToProps = dispatch => {
     onChangMusicItem: (item) => {
       dispatch(changeMusic(item))
     },
-
+    onDeleteMusicItem: (item) =>{
+      dispatch(deleteMusic(item))
+    }
 
   }
 }

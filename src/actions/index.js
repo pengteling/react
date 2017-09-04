@@ -24,3 +24,21 @@ export const changeMusic = (item)=>{
     item
   }
 }
+export const deleteMusic = (item)=>{
+  return {
+    type: 'DELETE_MUSIC',
+    item
+  }
+}
+export const changeProgress = (progress)=>{
+  return {
+    type: 'CHANGE_PROGRESS',
+    progress
+  }
+}
+export const changeVolume = (progress)=>{
+  return {
+    type: 'CHANGE_VOLUME',
+    progress
+  }
+}

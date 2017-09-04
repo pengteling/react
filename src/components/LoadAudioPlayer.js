@@ -26,7 +26,7 @@ class LoadAudioPlayer extends React.PureComponent{
     this.initPlayer = this.initPlayer.bind(this)
   }
   initPlayer(){
-    let currentMusicItem = this.props.musicList[this.props.list.currentIndex]
+    let currentMusicItem = this.props.list.currentMusicItem
     let media={
       title: currentMusicItem.title,
       artist: currentMusicItem.artist,
@@ -43,16 +43,35 @@ class LoadAudioPlayer extends React.PureComponent{
     }
   }
   shouldComponentUpdate(nextProps ,nextState){
-    console.log(this.props.musicList[this.props.list.currentIndex])
-    console.log(nextProps.musicList[nextProps.list.currentIndex])
-    if(this.props.musicList[this.props.list.currentIndex] == nextProps.musicList[nextProps.list.currentIndex]){
+    //console.log(this.props.musicList[this.props.list.currentIndex])
+    //console.log(nextProps.musicList[nextProps.list.currentIndex])
+    //state改变 但歌曲没有变 这时候注意 不重复渲染， 如 播放  暂停、切换循环、删除列表
+    //console.log(nextProps)
+    console.log("没有重复渲染")
+    if(this.props.player.volume!== nextProps.player.volume){
+      console.log("音量变化 ")
+      this.props.changeVolume(nextProps.player.volume)
+    }
+    if(this.props.player.progress!== nextProps.player.progress){
+      console.log("进度变化 ")
+      this.props.changeProgress(nextProps.player.progress)
+    }
+    if(this.props.list.currentMusicItem == nextProps.list.currentMusicItem){
       let isPlay = this.props.player.isPlay
-
-      if(isPlay){
-        this.props.pause()
-      }else{
-        this.props.play()
+      //console.log(isPlay == nextProps.player.isPlay)  //表示 有没有改变播放状态 play or pause
+      if(isPlay !== nextProps.player.isPlay){ //只有isPlay改变的情况下才暂停
+        if(isPlay){
+          this.props.pause()
+        }else{
+          this.props.play()
+        }
       }
+      //
+      // if(isPlay){
+      //   this.props.pause()
+      // }else{
+      //   this.props.play()
+      // }
       return false
     }
     return true
@@ -61,9 +80,11 @@ class LoadAudioPlayer extends React.PureComponent{
 
       //不能写在render里面 否则会报Warning 因为在渲染过程中又去改变state
       //this.props.init(media)
+      console.log("componentDidMount")
       this.initPlayer()
   }
   componentDidUpdate(){
+    console.log("componentDidUpdate")
     this.initPlayer()
   }
   render(){

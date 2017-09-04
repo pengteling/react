@@ -13,8 +13,9 @@ class Progress extends React.Component{
     //console.log("改变播放进度")
     let progress =(e.clientX -this.progressbar.getBoundingClientRect().left)/this.progressbar.clientWidth;
     //console.log(progress)
+    //progress = Math.floor(progress *100)
     this.props.onProgressChange && this.props.onProgressChange(progress)
-
+    //console.log(progress)
   }
   render(){
     //let progressbar

@@ -6,7 +6,6 @@ import LoadAudioPlayer from '../components/LoadAudioPlayer'
 
 const mapStateToProps = state =>{
   return{
-    musicList: state.musicList,
     player: state.player,
     list:state.list
   }
@@ -26,6 +25,15 @@ const mapDispatchToProps = dispatch => {
     init:(media)=>{
       dispatch(actions.setMedia("AudioPlayer",media))
       dispatch(actions.play("AudioPlayer"))
+    },
+    changeVolume:(progress)=>{
+      console.log(progress)
+      dispatch(actions.setVolume("AudioPlayer",progress))
+    },
+    changeProgress:(progress)=>{
+      console.log(progress)
+      //播放进度
+      dispatch(actions.setPlayHead("AudioPlayer",progress*100))
     }
 
   }
