@@ -4,12 +4,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 module.exports={
   entry:{
-    "index":"./src/js/index.js"
+    "index":"./src/index.js"
   },
   output:{
     path:path.resolve(__dirname ,"./dist"),
     filename:"js/[name].js",
-    //publicPath: "./"
+    publicPath: "/"
   },
   module:{
     rules:[
@@ -40,7 +40,8 @@ module.exports={
           //   loader:"style-loader"
           // },
           {
-            loader:"css-loader"
+            loader:"css-loader",
+            options: { minimize: true }
           },
           {
             loader:"sass-loader"
@@ -54,7 +55,8 @@ module.exports={
             loader:"style-loader"
           },
           {
-            loader:"css-loader"
+            loader:"css-loader",
+            options: { minimize: true }
           }
         ]
       },
@@ -77,21 +79,32 @@ module.exports={
       //inject:'head'
       inject:"body"
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    //new webpack.HotModuleReplacementPlugin(),
+    //提取公共commjs
+    //new webpack.optimize.CommonsChunkPlugin("commons"),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
     }),
     new ExtractTextPlugin({
       filename:"css/[name].css",
       allChunks:true
+    }),
+    //压缩js 除$ jQuery
+    new webpack.optimize.UglifyJsPlugin({
+        mangle: {
+            except: ['$', 'jQuery']
+        },
+        compress: {
+            warnings: false
+        }
     })
   ],
   devServer: {
     //contentBase: path.join(__dirname, "dist"),
     //compress: true,
     port: 8080,
-    inline:true,
-    hot:true,
+    //inline:true,
+    //hot:true,
     host:"0.0.0.0"
   }
   //devtool:"source-map"
