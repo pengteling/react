@@ -92,7 +92,8 @@ class LoadAudioPlayer extends React.PureComponent{
       this.initPlayer()
   }
   componentDidUpdate(){
-    console.log("componentDidUpdate")
+    console.log("LoadAudioPlayer componentDidUpdate")
+
     this.initPlayer()
   }
   render(){

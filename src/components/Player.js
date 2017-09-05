@@ -33,8 +33,15 @@ class Player extends React.Component{
 
   shouldComponentUpdate(nextProps){
     //console.log("shouldComponentUpdate")
-    if (nextProps.jPlayers.AudioPlayer.currentPercentAbsolute>=100){
-      console.log(nextProps.jPlayers.AudioPlayer.currentPercentAbsolute)
+    //这里用 nextProps. 则会执行两次
+    let currentPercentAbsolute=this.props.jPlayers.AudioPlayer.currentPercentRelative
+    // console.log(nextProps.jPlayers.AudioPlayer.currentTime)
+    // console.log(nextProps.jPlayers.AudioPlayer.duration)
+    // console.log(nextProps.jPlayers.AudioPlayer.durationText)
+    if (currentPercentAbsolute>=100 ){
+
+      console.log("播放结束 即将下一首")
+      //console.log(nextProps.jPlayers.AudioPlayer.currentTimeText)
       //this.props.pause()
 
       //this.props.pause()
