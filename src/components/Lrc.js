@@ -25,8 +25,15 @@ class Lrc extends React.Component{
 
   }
   componentDidUpdate(){
-    // document.getElementById('lrcUl').scrollHeight=document.getElementById('cur').scrollHeight    //window.scrollTo(0,500)
-    //console.log(document.getElementById('lrcUl').offsetTop)
+    if(document.getElementById('cur')){
+      //console.log(document.getElementById('cur').offsetTop)
+      let h = document.getElementById('cur').offsetTop -143 -200
+      document.getElementById('lrcUl').scrollTop = h
+    }
+
+
+    //console.log(document.getElementById('cur').offsetTop)
+    // document.getElementById('cur').offsetTop
   }
   render(){
     //console.log(this.props)
@@ -45,7 +52,7 @@ class Lrc extends React.Component{
           curClass="normal"
         }
          //prevTime=item.time
-      return( <li className={curClass} id={curClass} key={i} > [{item.time}]{item.txt} </li>)
+      return( <li className={curClass} id={curClass} key={i} > {item.txt} </li>)
     })
     return(
       <div className="lrc-component">

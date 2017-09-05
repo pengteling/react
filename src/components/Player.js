@@ -114,7 +114,7 @@ class Player extends React.Component{
                             </div>
                           </div>
                           <div className="-col-auto cover">
-                            <img className={`${player.isPlay ? 'play' : 'pause'}`} src={currentMusicItem.cover} alt={currentMusicItem.title} />
+                            <Link to='/lrc'><img className={`${player.isPlay ? 'play' : 'pause'}`} src={currentMusicItem.cover} alt={currentMusicItem.title} /></Link>
                           </div>
                         </div>
                     </div>
