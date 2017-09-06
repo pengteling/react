@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-fetch'
 
-// export const init = (json)=>({
-//   type:"INIT",
-//   json
-// })
+export const init = (json)=>({
+  type:"INIT",
+  json
+})
 
 // 异步操作发起时的action
 export const fetchPostsRequest =()=>({
@@ -15,15 +15,19 @@ export const fetchPostsFailure =(err)=>({
   err
 })
 //操作成功发起的action
-export const fetchPostsSuccess =(res)=>({
+export const fetchPostsSuccess =(res,time)=>({
   type:"FETCH_POSTS_SUCCESS",
-  res
+  res,
+  time
 })
 
-export const fetchPosts = postTitle => (dispatch, getState) => {
+export const fetchPosts = (postTitle,time) => (dispatch, getState) => {
   dispatch(fetchPostsRequest())
   return fetch(`/api/${postTitle}.json`)
-    .then(response => response.json())
-    .then(json => dispatch(fetchPostsSuccess(json)))
+    .then(response => {
+      //console.log(response.json())
+      return response.json()
+    })
+    .then(json => dispatch(fetchPostsSuccess(json,time)))
 
 }

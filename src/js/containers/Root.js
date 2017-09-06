@@ -3,12 +3,14 @@ import { Provider } from 'react-redux'
 import {createStore,applyMiddleware} from 'redux'
 import {createLogger}  from 'redux-logger' //注意 有括号
 import reducer from './../reducers'
-import {fetchPosts,fetchPostsRequest} from './../actions'
+import {fetchPosts,fetchPostsRequest,init} from './../actions'
+import thunk from 'redux-thunk'
+import ShowAsyncApp from './ShowAsyncApp'
 
 const logger = createLogger()
 const store = createStore(
   reducer,
-  applyMiddleware(logger)
+  applyMiddleware(logger,thunk)
 )
 //console.log(store.getState())
 
@@ -20,21 +22,25 @@ const store = createStore(
 //   next(action);
 //   console.log('next state', store.getState());
 // }
-// let action = init({
-//   "city":"上海",
-//   "temp":"29℃"
-// })
-let action=fetchPostsRequest('data')
-console.log(action)
-store.dispatch(action)
-//console.log(store.getState())
+
+
+
+let action1 = init({
+  "city":"上海",
+  "temp":"？"
+})
+store.dispatch(action1)
+// let action2=fetchPosts('data',new Date().toLocaleString())
+// //console.log(action)
+// store.dispatch(action2)
+// //console.log(store.getState())
 
 
 export default class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div>{store.getState().temp}</div>
+        <ShowAsyncApp ownProps1 ="www.wether.com.cn" />
       </Provider>
     )
   }
