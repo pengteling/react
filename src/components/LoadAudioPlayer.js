@@ -50,6 +50,10 @@ class LoadAudioPlayer extends React.PureComponent{
       this.props.pause()
     }
   }
+  componentWillMount(){
+    console.log("componentWillMount")
+    this.props.async()
+  }
   shouldComponentUpdate(nextProps ,nextState){
     //console.log(this.props.musicList[this.props.list.currentIndex])
     //console.log(nextProps.musicList[nextProps.list.currentIndex])
@@ -89,7 +93,8 @@ class LoadAudioPlayer extends React.PureComponent{
       //不能写在render里面 否则会报Warning 因为在渲染过程中又去改变state
       //this.props.init(media)
       console.log("componentDidMount")
-      this.initPlayer()
+      //this.initPlayer()
+
   }
   componentDidUpdate(){
     console.log("LoadAudioPlayer componentDidUpdate")

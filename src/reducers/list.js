@@ -1,12 +1,21 @@
-import {MUSIC_LIST} from "../musicdata/musicList"
+//import {MUSIC_LIST} from "../musicdata/musicList"
 //console.log(MUSIC_LIST)
+
+
 const list = (state = {
-  musicList:MUSIC_LIST,
-  currentMusicItem:MUSIC_LIST[0],
+  musicList:{},
+  currentMusicItem:{},
   repeatType:"cycle"
 },action) => {
   //console.log(action.type)
   switch (action.type) {
+    case "FETCH_POSTS_REQUEST":
+      return state
+    case "FETCH_POSTS_FAILURE":
+      return state
+    case "FETCH_POSTS_SUCCESS":
+      //console.log(action.res)
+      return {...state, musicList:action.res,currentMusicItem:action.res[0]}
     case 'PLAY_NEXT':
       if(state.musicList.length>0){ //列表清空了
         let nextIndex = 0

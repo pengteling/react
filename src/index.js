@@ -1,15 +1,26 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore ,applyMiddleware } from 'redux'
 import musicApp from './reducers'
 import App from './components/App'
 import "./sass/comm.scss"
 import AudioPlayer from './components/AudioPlayer'
 import { initialState, reducer as jPlayers  } from 'react-jplayer';
+import thunk from 'redux-thunk'
+import {createLogger}  from 'redux-logger' //注意 有括号
+
+const logger = createLogger()
 
 //console.log(actions )
-let store = createStore(musicApp,{ jPlayers: initialState(AudioPlayer) })
+let store = createStore(
+  musicApp,
+  { jPlayers: initialState(AudioPlayer) },
+  applyMiddleware(
+    logger,
+    thunk
+  )
+)
 console.log(store.getState())
 render(
   <Provider store={store}>
