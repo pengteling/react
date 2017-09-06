@@ -1,4 +1,5 @@
-import fetch from 'isomorphic-fetch'
+//import fetch from 'isomorphic-fetch'
+import $ from 'jquery'
 
 export const init = (json)=>({
   type:"INIT",
@@ -21,13 +22,23 @@ export const fetchPostsSuccess =(res,time)=>({
   time
 })
 
-export const fetchPosts = (postTitle,time) => (dispatch, getState) => {
-  dispatch(fetchPostsRequest())
-  return fetch(`/api/${postTitle}.json`)
-    .then(response => {
-      //console.log(response.json())
-      return response.json()
-    })
-    .then(json => dispatch(fetchPostsSuccess(json,time)))
+// export const fetchPosts = (postTitle,time) => (dispatch, getState) => {
+//   dispatch(fetchPostsRequest())
+//   return fetch(`/api/${postTitle}.json`)
+//     .then(response => {
+//       //console.log(response.json())
+//       return response.json()
+//     })
+//     .then(json => dispatch(fetchPostsSuccess(json,time)))
+//
+// }
 
+//getState() 可以拿到当前整个state
+export const fetchPosts = (postTitle,time) =>(dispatch,getState)=>{
+  dispatch(fetchPostsRequest())
+  console.log(getState())
+  $.get(`/api/${postTitle}.json`,(data)=>{
+    dispatch(fetchPostsSuccess(data,time))
+    console.log(getState())
+  })
 }

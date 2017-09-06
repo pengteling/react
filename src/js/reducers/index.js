@@ -12,7 +12,7 @@ const reducer = (state={
     case "FETCH_POSTS_FAILURE":
       return {...state, json:{},isFetching:false}
     case "FETCH_POSTS_SUCCESS":
-      console.log(action.res)
+      //console.log(action.res)
       return {...state, json:action.res,isFetching:false,lastUpdate: action.time}
     default:
       return state
