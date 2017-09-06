@@ -1,31 +1,23 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore ,applyMiddleware } from 'redux'
-import musicApp from './reducers'
-import App from './components/App'
-import "./sass/comm.scss"
-import AudioPlayer from './components/AudioPlayer'
-import { initialState, reducer as jPlayers  } from 'react-jplayer';
-import thunk from 'redux-thunk'
-import {createLogger}  from 'redux-logger' //注意 有括号
+import $ from 'jquery'
+import 'babel-polyfill'
+// Promise
+// $.get('http://music.henshui.com/api/musicList.js')
+//   .then(data=>{
+//     console.log(data)
+//     return $.get('http://music.henshui.com/')
+//   })
+//   .then(data=>{console.log(data)})
 
-const logger = createLogger()
 
-//console.log(actions )
-let store = createStore(
-  musicApp,
-  { jPlayers: initialState(AudioPlayer) },
-  applyMiddleware(
-    logger,
-    thunk
-  )
-)
-console.log(store.getState())
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
-//store.dispatch(actions.play("AudioPlayer"))
+function* gen(x){
+  var y = yield x + 2;
+  var z = yield x + 3;
+  return y;
+}
+
+var g  =gen(1)
+//console.log(gen)
+console.log(g)
+console.log(g.next())
+console.log(g.next())
+console.log(g.next())
