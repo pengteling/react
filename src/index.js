@@ -6,7 +6,7 @@ import musicApp from './reducers'
 import App from './components/App'
 import "./sass/comm.scss"
 import AudioPlayer from './components/AudioPlayer'
-import { initialState, reducer as jPlayers  } from 'react-jplayer';
+import {  reducer as jPlayers  } from 'react-jplayer';
 import thunk from 'redux-thunk'
 import {createLogger}  from 'redux-logger' //注意 有括号
 
@@ -15,9 +15,8 @@ const logger = createLogger()
 //console.log(actions )
 let store = createStore(
   musicApp,
-  { jPlayers: initialState(AudioPlayer) },
   applyMiddleware(
-    logger,
+  //logger,
     thunk
   )
 )

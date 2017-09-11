@@ -31,26 +31,27 @@ class Player extends React.Component{
     super(props)
   }
 
-  shouldComponentUpdate(nextProps){
-    //console.log("shouldComponentUpdate")
-    //这里用 nextProps. 则会执行两次
-    let currentPercentAbsolute=this.props.jPlayers.AudioPlayer.currentPercentRelative
-    // console.log(nextProps.jPlayers.AudioPlayer.currentTime)
-    // console.log(nextProps.jPlayers.AudioPlayer.duration)
-    // console.log(nextProps.jPlayers.AudioPlayer.durationText)
-    if (currentPercentAbsolute>=100 ){
-
-      console.log("播放结束 即将下一首")
-      //console.log(nextProps.jPlayers.AudioPlayer.currentTimeText)
-      //this.props.pause()
-
-      //this.props.pause()
-      this.props.playNext()
-      return false
-
-    }
-    return true
-  }
+//播放完自动下一首 但是这里有问题
+  // shouldComponentUpdate(nextProps){
+  //   //console.log("shouldComponentUpdate")
+  //   //这里用 nextProps. 则会执行两次
+  //   let currentPercentAbsolute=this.props.jPlayers.AudioPlayer.currentPercentRelative
+  //   // console.log(nextProps.jPlayers.AudioPlayer.currentTime)
+  //   // console.log(nextProps.jPlayers.AudioPlayer.duration)
+  //   // console.log(nextProps.jPlayers.AudioPlayer.durationText)
+  //   if (currentPercentAbsolute>=80 ){
+  //
+  //     console.log("播放结束 即将下一首")
+  //     //console.log(nextProps.jPlayers.AudioPlayer.currentTimeText)
+  //     //this.props.pause()
+  //
+  //     //this.props.pause()
+  //     //this.props.playNext()
+  //     //return true
+  //
+  //   }
+  //   return true
+  // }
   componentWillUnmount(){
     console.log("componentWillUnmount")
   }
@@ -78,6 +79,7 @@ class Player extends React.Component{
 //       // if (jPlayers.AudioPlayer.currentPercentAbsolute>=99.9){
 //       //   playNext()
 //       // }
+//console.log(jPlayers.AudioPlayer.paused)
        return (
 
                 <div className="player-page">
@@ -110,7 +112,7 @@ class Player extends React.Component{
                             <div className="mt35 row">
                               <div>
                                 <i className="icon prev" onClick={ ()=>{playPrev()}}></i>
-                                <i className={`icon ml20 ${player.isPlay ? 'pause' : 'play'}`} onClick={()=>{
+                                <i className={`icon ml20 ${!jPlayers.AudioPlayer.paused ? 'pause' : 'play'}`} onClick={()=>{
                                   player.isPlay?pause():play()
                                 }}></i>
                                 <i className="icon next ml20" onClick={ ()=>{playNext()} }></i>

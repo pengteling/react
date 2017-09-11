@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { playNext,playPrev,playPause,changeRepeatType,changeProgress,changeVolume } from '../actions'
+import { pause,playNext,playPrev,playPause,changeRepeatType,changeProgress,changeVolume } from '../actions'
 import {actions} from 'react-jplayer'
 import Player from '../components/Player'
 
