@@ -11,7 +11,7 @@ class Lrc extends React.Component{
       return {
         time: item.split("]")[0],
         txt:item.split("]")[1],
-        time_end: arr[i+1]
+        time_end: arr[i+1]?arr[i+1].split("]")[0]:undefined
       }
     })
     lrc.shift()
