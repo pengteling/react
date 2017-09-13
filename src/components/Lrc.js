@@ -16,12 +16,30 @@ class Lrc extends React.Component{
     })
     lrc.shift()
     this.lrc = lrc
-    console.log(lrc)
+    //console.log(lrc)
 
   }
-  componentWillUpdate(){
+  componentWillRecieveProps(nextProps){
+
+  }
+  componentWillUpdate(nextProps){
     //console.log(this.props.jPlayers.AudioPlayer.currentTime)
     //console.log(this.props.jPlayers.AudioPlayer.currentTimeText)
+    //在歌词页 下一首后也需要更新歌词
+    if(nextProps.list.currentMusicItem != this.props.list.currentMusicItem){
+      let arr = nextProps.list.currentMusicItem.lrc.split("[")
+      let lrc = arr.map((item,i)=>{
+        return {
+          time: item.split("]")[0],
+          txt:item.split("]")[1],
+          time_end: arr[i+1]?arr[i+1].split("]")[0]:undefined
+        }
+      })
+      lrc.shift()
+      this.lrc = lrc
+      console.log(lrc)
+    }
+
 
   }
   componentDidUpdate(){
